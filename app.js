@@ -7,6 +7,8 @@ const app=express()
 app.use(cors())
 app.use(express.json())
 
+mongoose.connect("mongodb+srv://dhiya04:dhiyafisat@cluster0.wspdqan.mongodb.net/gowndb?retryWrites=true&w=majority&appName=Cluster0")
+
 app.post("/add",(req,res)=>{
     let input=req.body
     let gown=new gownmodel(input)
@@ -20,7 +22,11 @@ app.post("/search",(req,res)=>{
 })
 
 app.post("/view",(req,res)=>{
-    res.send("View")
+   gownmodel.find().then(
+    (data)=>{
+        res.json(data)
+    }
+   ).catch()
 })
 
 app.listen(8080,()=>{
