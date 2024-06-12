@@ -31,6 +31,19 @@ app.post("/search",(req,res)=>{
    
 })
 
+app.post("/delete",(req,res)=>{
+    let input=req.body
+    gownmodel.findByIdAndDelete(input._id).then(
+        (response)=>{
+            res.json({"status":"success"})
+        }
+    ).catch(
+        (error)=>{
+            res.json("error")
+        }
+    )
+})
+
 app.post("/view",(req,res)=>{
    gownmodel.find().then(
     (data)=>{
